@@ -21,7 +21,7 @@ entity Courses : cuid, managed {
     duration      : Integer @title: '{i18n>duration}';
     enrollments   : Composition of many Enrollments
                         on enrollments.course = $self;
-    course_status : Association to CourseStatus default '01';
+    course_status : Association to CourseStatus default '01'; // default status for course id
 }
 
 entity Trainers : cuid {
