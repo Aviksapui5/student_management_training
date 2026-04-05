@@ -1,0 +1,32 @@
+{
+  "xsappname": "student_management_training",
+  "tenant-mode": "dedicated",
+  "description": "Security profile of called application",
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.AdminPerson",
+      "description": "AdminPerson"
+    },
+    {
+      "name": "$XSAPPNAME.Student",
+      "description": "Student"
+    }
+  ],
+  "role-templates": [
+    {
+      "name": "AdminPerson",
+      "scope-references": [
+        "$XSAPPNAME.AdminPerson"
+      ],
+      "description": "generated"
+    },
+    {
+      "name": "Student",
+      "scope-references": [
+        "$XSAPPNAME.Student"
+      ],
+      "description": "generated"
+    }
+  ],
+  "attributes": []
+}

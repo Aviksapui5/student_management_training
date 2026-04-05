@@ -1,0 +1,216 @@
+{
+  "_version": "1.82.0",
+  "sap.app": {
+    "id": "com.course.app.courseuiapp",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:lrop",
+      "version": "1.20.4",
+      "toolsId": "6db1f262-5624-4a63-8a31-07d9dbb28aa7"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "odata/v4/training-management-api/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "odataVersion": "4.0"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "fiorielements_ui5_app-display": {
+          "semanticObject": "fiorielements_ui5_app",
+          "action": "display",
+          "title": "Course UI App",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.145.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.fe.templates": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "com.course.app.courseuiapp.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      }
+    },
+    "resources": {
+      "css": []
+    },
+    "routing": {
+      "config": {},
+      "routes": [
+        {
+          "pattern": ":?query:",
+          "name": "CoursesList",
+          "target": "CoursesList"
+        },
+        {
+          "pattern": "Courses({key}):?query:",
+          "name": "CoursesObjectPage",
+          "target": "CoursesObjectPage"
+        },
+        {
+          "name": "Courses_enrollmentsObjectPage",
+          "pattern": "Courses({key})/enrollments({enrollmentsKey}):?query:",
+          "target": "Courses_enrollmentsObjectPage"
+        }
+      ],
+      "targets": {
+        "CoursesList": {
+          "type": "Component",
+          "id": "CoursesList",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "contextPath": "/Courses",
+              "variantManagement": "Page",
+              "navigation": {
+                "Courses": {
+                  "detail": {
+                    "route": "CoursesObjectPage"
+                  }
+                }
+              },
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "type": "GridTable"
+                  }
+                }
+              },
+              "initialLoad": "Enabled"
+            }
+          }
+        },
+        "CoursesObjectPage": {
+          "type": "Component",
+          "id": "CoursesObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/Courses",
+              "controlConfiguration": {
+                "enrollments/@com.sap.vocabularies.UI.v1.LineItem#i18nEnrollmentsDetails": {
+                  "tableSettings": {
+                    "type": "GridTable"
+                  }
+                }
+              },
+              "navigation": {
+                "enrollments": {
+                  "detail": {
+                    "route": "Courses_enrollmentsObjectPage"
+                  }
+                }
+              },
+              "content": {
+                "header": {
+                  "actions": {
+                    "updateStatus": {
+                      "press": "com.course.app.courseuiapp.ext.controller.CallActions.updateStatusOfCourse",
+                      "visible": "{= !${ui>/isEditable}}",
+                      "enabled": true,
+                      "text": "Update Status",
+                      "position": {
+                        "placement": "Before",
+                        "anchor": "EditAction"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "Courses_enrollmentsObjectPage": {
+          "type": "Component",
+          "id": "Courses_enrollmentsObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "navigation": {},
+              "contextPath": "/Courses/enrollments",
+              "content": {
+                "header": {
+                  "visible": false
+                }
+              },
+              "editableHeaderContent": false
+            }
+          }
+        }
+      }
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "transactional"
+  },
+  "sap.fe": {
+    "app": {
+      "enableLazyLoading": true
+    }
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "student_management_training.service"
+  }
+}

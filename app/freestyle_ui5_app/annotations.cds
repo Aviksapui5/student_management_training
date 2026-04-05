@@ -1,0 +1,1 @@
+using TrainingManagementAPI as service from '../../srv/service';

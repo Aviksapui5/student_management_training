@@ -1,0 +1,22 @@
+<core:FragmentDefinition xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns="sap.m" >
+    <Dialog title="Update Status" core:require="{handler: 'com/course/app/courseuiapp/ext/controller/CallActions'}">
+        <content>
+        <form:SimpleForm >
+            <form:content>
+                 <Label text="Select Status"></Label>
+            <ComboBox items="{/CourseStatus}" id="oStatusCombobox">
+                <items>
+                    <core:Item key="{code}" text="{description}"></core:Item>
+                </items>
+            </ComboBox>
+            </form:content>        
+        </form:SimpleForm>           
+        </content>
+        <beginButton>
+            <Button text="Cancel" press="handler.onCloseDialog"></Button>
+        </beginButton>
+        <endButton>
+            <Button text="Submit" press="handler.onSubmitData"></Button>
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

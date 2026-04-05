@@ -1,0 +1,39 @@
+GET http://localhost:4004/odata/v4/training-management-api/$metadata
+
+### Reading Data from Students Table
+GET http://localhost:4004/odata/v4/training-management-api/Students
+Content-Type: application/json
+
+### Create New Record in Students Table
+POST http://localhost:4004/odata/v4/training-management-api/Students
+Content-Type: application/json
+
+{
+      "name": "Rahul Sharma",
+      "email": "rahul.sharma@gmail.com",
+      "phone": "9876543210",
+      "address": "Pune Maharashtra"
+}
+
+### Update exisiting Student Record
+PATCH http://localhost:4004/odata/v4/training-management-api/Students('f0133ed3-010e-44b3-9d95-bf117425065d')
+Content-Type: application/json
+
+{      
+      "phone": "9877777777"      
+}
+
+### Deep Insert 
+POST http://localhost:4004/odata/v4/training-management-api/Courses
+Content-Type: application/json
+
+{
+    "title"       : "SAP FIORI",
+    "trainer_ID"     : "c5da312e-c9ea-40ae-8b19-41a214149643",
+    "duration"    : 50,
+    "enrollments" : [{
+        "student_ID"      : "11111111-1111-1111-1111-111111111111",
+        "enrolledDate" : "2024-01-01",
+        "status_code"       : "PD"
+    }]
+}
