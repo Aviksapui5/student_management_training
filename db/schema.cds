@@ -24,6 +24,7 @@ entity Courses : cuid, managed {
     course_status : Association to CourseStatus default '01'; // default status for course id
 }
 
+//Trainer entity 
 entity Trainers : cuid {
     name      : String @title: '{i18n>TrainerName}';
     expertise : String @title: '{i18n>TrainerExpertise}';
